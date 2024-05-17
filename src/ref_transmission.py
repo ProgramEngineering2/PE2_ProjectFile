@@ -56,13 +56,13 @@ for xml_file in xml_files:
         ax.scatter(length_values, measured_transmission_values, color='black', label='Measured Data')
 
         # 다항식 차수 범위 설정
-        poly_degrees = range(1, 14)
+        poly_degrees = range(1, 7)
 
         # 각 차수에 대한 fitting 결과 저장할 리스트 초기화
         fitting_results = []
 
-        # 1차부터 13차까지의 fitting 결과 저장
-        for degree in range(1, 14):
+        # 1차부터 6차까지의 fitting 결과 저장
+        for degree in range(1, 7):
             coeffs = np.polyfit(length_values, measured_transmission_values, degree)
             p = np.poly1d(coeffs)
             yhat = p(length_values)
