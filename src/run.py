@@ -1,8 +1,18 @@
 import matplotlib.pyplot as plt
-from memo import plot_iv_data
-from memo import plot_transmission_spectra_all
-from memo import plot_transmission_spectra
-from memo import plot_flat_transmission_spectra
+import pandasall
+
+def main():
+    final_df = pandasall.pandas_data()
+    print(final_df)
+    final_df.to_csv('./pandas.csv')
+
+if __name__ == "__main__":
+    main()
+
+from ivcurve import plot_iv_data
+from transmission import plot_transmission_spectra_all
+from ref_transmission import plot_transmission_spectra
+from flat_transmission import plot_flat_transmission_spectra
 
 fig, ax = plt.subplots()
 
