@@ -1,10 +1,18 @@
 import matplotlib.pyplot as plt
 import pandasall
+import os
 
 def main():
-    final_df = pandas.pandas_data()
+    # CSV 파일을 저장할 디렉토리 경로
+    csv_directory = os.path.join('res', 'CSV')
+    if not os.path.exists(csv_directory):
+        os.makedirs(csv_directory)
+
+    final_df = pandasall.pandas_data()
     print(final_df)
-    final_df.to_csv('./pandas.csv')
+    csv_file_path = os.path.join(csv_directory, 'pandas.csv')  # res/CSV 디렉토리에 있는 pandas.csv 파일 경로
+    final_df.to_csv(csv_file_path, index=False)
+
 
 if __name__ == "__main__":
     main()
