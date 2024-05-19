@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandasall
 
 def main():
-    final_df = pandasall.pandas_data()
+    final_df = pandas.pandas_data()
     print(final_df)
     final_df.to_csv('./pandas.csv')
 
