@@ -4,6 +4,10 @@ import pandas as pd
 import lmfit
 import numpy as np
 
+import warnings
+# RankWarning 경고 무시
+warnings.simplefilter('ignore', np.RankWarning)
+
 def pandas_data():
     # 여러 디렉토리 경로
     directories = [
