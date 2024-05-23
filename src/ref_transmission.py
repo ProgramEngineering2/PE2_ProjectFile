@@ -5,7 +5,7 @@ import lmfit
 import numpy as np
 import matplotlib.pyplot as plt
 
-## 여러 디렉토리 경로
+# 여러 디렉토리 경로
 directories = [
     '../dat/HY202103/D07/20190715_190855',
     '../dat/HY202103/D08/20190526_082853',
