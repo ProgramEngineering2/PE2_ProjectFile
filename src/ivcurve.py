@@ -1,6 +1,5 @@
 import os
 import xml.etree.ElementTree as ET
-import pandas_frame as pd
 import lmfit
 import numpy as np
 import matplotlib.pyplot as plt
