@@ -17,3 +17,32 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+import os
+import matplotlib.pyplot as plt
+import src.ivcurve
+import src.transmission
+import src.ref_transmission
+import src.flat_transmission
+
+# 파일 경로 설정
+jpgs_directory = os.path.join('res', 'jpgs')
+if not os.path.exists(jpgs_directory):
+    os.makedirs(jpgs_directory)
+
+# 그래프 생성
+fig, ax = plt.subplots()
+
+plot_iv_data(ax)
+plot_transmission_spectra_all(ax, root)
+plot_transmission_spectra(ax, root)
+plot_flat_transmission_spectra(ax, root)
+
+
+plt.show()
+
+# JPG 파일로 저장
+jpg_file_path = os.path.join(jpgs_directory, 'graphs.jpg')
+plt.savefig(jpg_file_path)
+
+print(f"그래프가 {jpg_file_path}에 저장되었습니다.")
