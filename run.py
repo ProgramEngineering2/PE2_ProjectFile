@@ -30,7 +30,7 @@ def main():
     final_df.to_csv(csv_file_path, index=False)
 
     # Plot
-    for xml_file in tqdm(xml_files[:10]):
+    for xml_file in tqdm(xml_files):
         tree = ET.parse(xml_file)
         root = tree.getroot()
 
