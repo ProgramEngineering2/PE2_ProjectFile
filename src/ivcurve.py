@@ -70,31 +70,52 @@ def plot_iv_data(ax, root: ET.Element):
     ax.set_title('IV raw dat & fitted dat')
     ax.legend()
 
-if __name__ == "__main__":
-
-    # 여러 디렉토리 경로
-    directories = [
-        '../dat/HY202103/D07/20190715_190855',
-        '../dat/HY202103/D08/20190526_082853',
-        '../dat/HY202103/D08/20190528_001012',
-        '../dat/HY202103/D08/20190712_113254',
-        '../dat/HY202103/D23/20190528_101900',
-        '../dat/HY202103/D23/20190531_072042',
-        '../dat/HY202103/D23/20190603_204847',
-        '../dat/HY202103/D24/20190528_105459',
-        '../dat/HY202103/D24/20190528_111731',
-        '../dat/HY202103/D24/20190531_151815',
-        '../dat/HY202103/D24/20190603_225101'
-    ]
-
-    # 모든 XML 파일 경로를 담을 리스트
-    xml_files = []
-
-    # 각 디렉토리마다 'LMZ'가 들어가는 XML 파일만을 찾아서 리스트에 추가
-    for directory in directories:
-        file_list = os.listdir(directory)
-        xml_files.extend([os.path.join(directory, file) for file in file_list if 'LMZ' in file and file.endswith(".xml")])
-
+def plot_and_save_graphs(jpgs_directory, xml_files):
     for xml_file in xml_files:
         tree = ET.parse(xml_file)
         root = tree.getroot()
+
+        # 새로운 그래프 생성
+        plt.figure(figsize=(10, 6))
+        ax = plt.gca()
+
+        # 데이터를 이용하여 그래프 그리기
+        plot_iv_data(ax, root)
+
+        # 그래프 저장
+        filename = os.path.splitext(os.path.basename(xml_file))[0] + '_ivcurve.jpg'
+        plt.savefig(os.path.join(jpgs_directory, filename))
+        plt.close()  # 그래프 초기화
+
+if __name__ == "__main__":
+    # 여러 디렉토리 경로
+    directories = [
+        'dat/HY202103/D07/20190715_190855',
+        'dat/HY202103/D08/20190526_082853',
+        'dat/HY202103/D08/20190528_001012',
+        'dat/HY202103/D08/20190712_113254',
+        'dat/HY202103/D23/20190528_101900',
+        'dat/HY202103/D23/20190531_072042',
+        'dat/HY202103/D23/20190603_204847',
+        'dat/HY202103/D24/20190528_105459',
+        'dat/HY202103/D24/20190528_111731',
+        'dat/HY202103/D24/20190531_151815',
+        'dat/HY202103/D24/20190603_225101'
+    ]
+    
+    # Voltage 및 Current 요소의 텍스트 값을 파싱하여 출력
+    voltage_text = iv_measurement_element.find('.//Voltage').text
+    current_text = iv_measurement_element.find('.//Current').text
+
+    # Voltage 및 Current 텍스트 값을 파싱하여 실수형 리스트로 변환
+    voltage_values = [float(value) for value in voltage_text.split(',')]
+    current_values = [float(value) for value in current_text.split(',')]
+    
+    # JPG 파일 저장 디렉토리 생성
+    jpgs_directory = os.path.join('res', 'jpgs')
+    if not os.path.exists(jpgs_directory):
+        os.makedirs(jpgs_directory)
+
+    # 그래프 생성 및 저장
+    plot_and_save_graphs(jpgs_directory, xml_files)
+    
