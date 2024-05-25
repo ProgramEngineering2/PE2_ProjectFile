@@ -4,3 +4,11 @@
 
 # Ignore dat directory
 /dat/
+
+# Ignore res directory
+/res/
+
+# Ignore pycache file and vscode file
+*/__pycache__/*
+.vscode
+/.idea/

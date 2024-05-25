@@ -3,41 +3,23 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import lmfit
 import numpy as np
+from tqdm import tqdm
+from typing import List
 
 import warnings
 # RankWarning 경고 무시
 warnings.simplefilter('ignore', np.RankWarning)
 
-def pandas_data():
-    # 여러 디렉토리 경로
-    directories = [
-        'dat/HY202103/D07/20190715_190855',
-        'dat/HY202103/D08/20190526_082853',
-        'dat/HY202103/D08/20190528_001012',
-        'dat/HY202103/D08/20190712_113254',
-        'dat/HY202103/D23/20190528_101900',
-        'dat/HY202103/D23/20190531_072042',
-        'dat/HY202103/D23/20190603_204847',
-        'dat/HY202103/D24/20190528_105459',
-        'dat/HY202103/D24/20190528_111731',
-        'dat/HY202103/D24/20190531_151815',
-        'dat/HY202103/D24/20190603_225101'
-    ]
-
-    # 모든 XML 파일 경로를 담을 리스트
-    xml_files = []
-
-    # 각 디렉토리마다 'LMZ'가 들어가는 XML 파일만을 찾아서 리스트에 추가
-    for directory in directories:
-        file_list = os.listdir(directory)
-        xml_files.extend(
-            [os.path.join(directory, file) for file in file_list if 'LMZ' in file and file.endswith(".xml")])
-
+def pandas_data(xml_files: List[str] = []):
     # 결과를 담을 빈 리스트 초기화
     dfs = []
 
     # 각 XML 파일에 대해 반복하여 데이터프레임 생성
-    for xml_file in xml_files:
+    for xml_file in tqdm(xml_files):
+        
+        if not os.path.exists(xml_file):
+            continue
+
         # XML 파일 파싱
         tree = ET.parse(xml_file)
         root = tree.getroot()
