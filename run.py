@@ -29,12 +29,6 @@ if not os.path.exists(jpgs_directory):
 # 그래프 생성
 fig, ax = plt.subplots()
 
-plot_iv_data(ax)
-plot_transmission_spectra_all(ax, root)
-plot_transmission_spectra(ax, root)
-plot_flat_transmission_spectra(ax, root)
-
-plt.show()
 
 # JPG 파일로 저장
 jpg_file_path = os.path.join(jpgs_directory, 'graphs.jpg')
