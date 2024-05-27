@@ -89,3 +89,4 @@ if not os.path.exists(jpgs_directory):
 
 # 그래프 생성 및 저장
 plot_and_save_graphs(jpgs_directory, xml_files)
+#
