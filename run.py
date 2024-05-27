@@ -34,3 +34,4 @@ jpg_file_path = os.path.join(jpgs_directory, 'graphs.jpg')
 plt.savefig(jpg_file_path)
 
 print(f"그래프가 {jpg_file_path}에 저장되었습니다.")
+#
