@@ -29,9 +29,9 @@ if not os.path.exists(jpgs_directory):
 # 그래프 생성
 fig, ax = plt.subplots()
 
-
 # JPG 파일로 저장
 jpg_file_path = os.path.join(jpgs_directory, 'graphs.jpg')
 plt.savefig(jpg_file_path)
 
 print(f"그래프가 {jpg_file_path}에 저장되었습니다.")
+##
