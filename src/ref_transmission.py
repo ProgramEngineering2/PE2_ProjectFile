@@ -59,6 +59,7 @@ def plot_transmission_spectra(ax, root):
     equation = '\n'.join([' + '.join(equation_parts[i:i + 3]) for i in range(0, len(equation_parts), 3)])
     plt.text(1540, -13, f'Fitted Equation:\n{equation}', fontsize='small', color='red')
 
+
     r_squared_text = f'R^2: {round(fitting_results[best_degree - 1][1], 3)}, Degree: {best_degree}'
     plt.text(1540, -14, r_squared_text, fontsize='small', color='red')
 
@@ -85,34 +86,33 @@ def plot_and_save_graphs(jpgs_directory, xml_files):
         plt.savefig(os.path.join(jpgs_directory, filename))
         plt.close()  # 그래프 초기화
 
-if __name__ == "__main__":
-    # 여러 디렉토리 경로
-    directories = [
-        'dat/HY202103/D07/20190715_190855',
-        'dat/HY202103/D08/20190526_082853',
-        'dat/HY202103/D08/20190528_001012',
-        'dat/HY202103/D08/20190712_113254',
-        'dat/HY202103/D23/20190528_101900',
-        'dat/HY202103/D23/20190531_072042',
-        'dat/HY202103/D23/20190603_204847',
-        'dat/HY202103/D24/20190528_105459',
-        'dat/HY202103/D24/20190528_111731',
-        'dat/HY202103/D24/20190531_151815',
-        'dat/HY202103/D24/20190603_225101'
-    ]
+# 여러 디렉토리 경로
+directories = [
+    'dat/HY202103/D07/20190715_190855',
+    'dat/HY202103/D08/20190526_082853',
+    'dat/HY202103/D08/20190528_001012',
+    'dat/HY202103/D08/20190712_113254',
+    'dat/HY202103/D23/20190528_101900',
+    'dat/HY202103/D23/20190531_072042',
+    'dat/HY202103/D23/20190603_204847',
+    'dat/HY202103/D24/20190528_105459',
+    'dat/HY202103/D24/20190528_111731',
+    'dat/HY202103/D24/20190531_151815',
+    'dat/HY202103/D24/20190603_225101'
+]
 
-    # 모든 XML 파일 경로를 담을 리스트
-    xml_files = []
+# 모든 XML 파일 경로를 담을 리스트
+xml_files = []
 
-    # 각 디렉토리마다 'LMZ'가 들어가는 XML 파일만을 찾아서 리스트에 추가
-    for directory in directories:
-        file_list = os.listdir(directory)
-        xml_files.extend([os.path.join(directory, file) for file in file_list if 'LMZ' in file and file.endswith(".xml")])
+# 각 디렉토리마다 'LMZ'가 들어가는 XML 파일만을 찾아서 리스트에 추가
+for directory in directories:
+    file_list = os.listdir(directory)
+    xml_files.extend([os.path.join(directory, file) for file in file_list if 'LMZ' in file and file.endswith(".xml")])
 
-    # JPG 파일 저장 디렉토리 생성
-    jpgs_directory = os.path.join('res', 'jpgs')
-    if not os.path.exists(jpgs_directory):
-        os.makedirs(jpgs_directory)
+# JPG 파일 저장 디렉토리 생성
+jpgs_directory = os.path.join('res', 'jpgs')
+if not os.path.exists(jpgs_directory):
+    os.makedirs(jpgs_directory)
 
-    # 그래프 생성 및 저장
-    plot_and_save_graphs(jpgs_directory, xml_files)
+# 그래프 생성 및 저장
+plot_and_save_graphs(jpgs_directory, xml_files)
